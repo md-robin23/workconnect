@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="stylesheet" href="../css/home.css" />
+</head>
+
+<body>
+  <div class="homeContainer">
+    <div class="title">
+      <h1>Jobify</h1>
+
+      <input type="search" placeholder="search your catagory" />
+    </div>
+
+    <div class="catagory">
+      <button class="jobs catagoryButton">Jobs</button>
+      <button class="workers catagoryButton">Workers</button>
+      <button class="myPost catagoryButton">My Posts</button>
+    </div>
+    <div class="postJob">
+      <p> + Post a Job</p>
+    </div>
+
+    <div class="demoJobContainer" id="demoJobContainer">
+    </div>
+  </div>
+
+  <div class="modalContainer hidden" id="modalContainer">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="titleCloseIcon">
+          <h2>Post a Job</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <p class="modalPara">Describe what you need — workers will reach out.</p>
+      </div>
+      <form action="" method="post">
+        <div class="jobTitleInfo modalInput">
+          <label for="jobTitle">JOB TITLE</label>
+          <input type="text" placeholder="e.g. Fix leaking bathroom pipe" required />
+        </div>
+
+        <div class="categoryInfo modalInput">
+          <label for="category">CATEGORY</label>
+          <select name="category" id="category" required>
+            <option value="electrical">⚡ Electrical</option>
+            <option value="gardening">🌿 Gardening</option>
+            <option value="tutoring">📚 Tutoring</option>
+            <option value="cleaning">🧹 Cleaning</option>
+            <option value="plumbing">🔧 Plumbing</option>
+            <option value="painting">🎨 Painting</option>
+            <option value="moving">🚚 Moving</option>
+            <option value="tech">💻 Tech Help</option>
+            <option value="cooking">🍳 Cooking</option>
+            <option value="other">🛠 Other</option>
+          </select>
+        </div>
+
+        <div class="jobDescriptionInfo modalInput">
+          <label for="jobDescription">JOB DESCRIPTION</label>
+          <textarea name="jobDescription" id="jobDescription"
+            placeholder="Describe the work in detail - location, scope any requirements..." required></textarea>
+        </div>
+
+        <div class="budgetInfo modalInput">
+          <label for="budget">BUDGET (TK)</label>
+          <input type="number" name="budget" id="budget" placeholder="1500" required />
+        </div>
+
+        <div class="urgencyType modalInput">
+          <label for="urgency">URGENCY</label>
+          <select name="urgency" id="urgency" required>
+            <option value="flexible">Flexible</option>
+            <option value="asap">ASAP</option>
+            <option value="urgent">Urgent</option>
+          </select>
+        </div>
+
+        <div class="locationInfo modalInput">
+          <label for="location">LOCATION/AREA</label>
+          <input type="text" placeholder="e.g. Gulshan, Dhaka" name="location" id="location" required />
+        </div>
+
+        <div class="contactInfo modalInput">
+          <label for="telephone">CONTACT NUMBER</label>
+          <input type="tel" placeholder="01*********" required name="telephone" id="telephone" />
+        </div>
+
+        <div class="modal-footer">
+          <button type="reset" class="reset">Cancel</button>
+          <button type="submit">Post Job →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="../js/home.js">
+  </script>
+</body>
+
+</html>

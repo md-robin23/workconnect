@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../css/signin.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        <h2>Jobify</h2>
+        <p>Start your journey now with us.</p>
+      </div>
+      <div class="formContainer">
+              <div class="childFormContainer">
+        <h3>Create an account</h3>
+        <input
+          type="tel"
+          id="number"
+          placeholder="Enter phone number"
+          maxlength="11"
+          minlength="11"
+          pattern="[0-9]" {11}
+          inputmode="numeric"
+          autofocus
+        />
+
+        <button id="sendOtp" disabled>Send OTP</button>
+
+        <div class="otpBox">
+          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+        </div>
+
+        <button id="confirmOtp" disabled>Confirm OTP</button>
+      </div>
+      </div>
+
+    </div>
+
+    <script src="../js/signin.js"></script>
+  </body>
+</html>

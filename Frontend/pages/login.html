@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="container">
+      <div class="title">
+        <h2>Jobify</h2>
+        <p>Start your journey now with us.</p>
+      </div>
+      <div class="formContainer">
+              <div class="childFormContainer">
+        <h3>Login to your account</h3>
+        <div>
+          <input
+          type="tel"
+          id="number"
+          class="box"
+          placeholder="Enter phone number"
+          maxlength="11"
+          minlength="11"
+          pattern="[0-9]" {11}
+          inputmode="numeric"
+          autofocus
+        />
+        </div>
+          
+        <div>
+          <input class="box" type="password" name="password" id="password" placeholder="Enter password" minlength="4"/>
+        </div>
+        <a href="../pages/home.html">
+          <button type="submit">Log In</button>
+        </a>
+
+      </div>
+      </div>
+
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>

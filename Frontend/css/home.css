@@ -1,0 +1,369 @@
+* {
+  padding: 0;
+  margin: 0;
+  /* box-sizing: border-box; */
+}
+
+:root {
+  --ink: #0f0e0c;
+  --cream: #f5f0e8;
+  --warm: #ede8dd;
+  --accent: #e85d2f;
+  --accent2: #f5a623;
+  --muted: #8a8070;
+  --card: #faf7f2;
+  --border: #d9d3c7;
+  --green: #2d6a4f;
+  --blue: #1d4e89;
+}
+
+body {
+  background-color: var(--cream);
+  padding: 10px;
+  position: relative;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+html {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 18vh;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+  color: var(--cream);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(232, 93, 47, 0.08);
+  margin-bottom: 24px;
+  padding: 24px 10px;
+  text-align: center;
+}
+
+.title h1{ 
+  color: var(--cream);
+  margin-bottom: 12px;
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.title input {
+  width: 60%;
+  max-width: 400px;
+  min-width: 180px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.title input:focus {
+  outline: none;
+  border-color: var(--accent2);
+  box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.15);
+  background: var(--card);
+}
+
+@media (max-width: 900px) {
+  .title {
+    min-height: 14vh;
+    padding: 18px 5px;
+  }
+  .title h1 {
+    font-size: 1.5rem;
+  }
+  .title input {
+    width: 80%;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  .title {
+    min-height: 10vh;
+    padding: 12px 2px;
+    border-radius: 8px;
+  }
+  .title h1 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  .title input {
+    width: 98%;
+    min-width: 0;
+    font-size: 0.9rem;
+    height: 38px;
+  }
+}
+
+.catagory {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  min-height: 6vh;
+  max-height: 9vh;
+  min-width: 20%;
+  max-width: 25%;
+
+  background-color: var(--border);
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.postJob {
+  height: 40px;
+  width: 100px;
+  background-color: var(--accent);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  font-weight: bold;
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  cursor: pointer;
+  padding: 5px 30px;
+}
+
+.catagoryButton {
+  border-style: none;
+  background-color: var(--border);
+  color: var(--muted);
+}
+
+.category3 {
+  /* min-height: 5vh;
+  max-height: 8vh; */
+  height: fit-content;
+  width: fit-content;
+  background-color: white;
+  border-radius: 8px;
+  color: var(--ink);
+  font-weight: bold;
+  padding: 7px 17px;
+}
+
+@media (max-width: 753px) {
+  .catagory {
+    flex-direction: column;
+    height: fit-content;
+    width: 27%;
+    gap: 7px;
+    background-color: white;
+  }
+
+  .category3 {
+    padding: 5px 0;
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: normal
+  }
+}
+
+.demoJobContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
+  margin: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.jobCard {
+  width: 100%;
+  min-height: 250px;
+  background-color: var(--card);
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.categoryUrgency {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 60px;
+}
+
+.workerCard {
+  width: 100%;
+  min-height: 250px;
+  background-color: var(--card);
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.postCard {
+  width: 100%;
+  min-height: 250px;
+  background-color: var(--card);
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.isBlurred {
+  filter: blur(3px);
+  pointer-events: all;
+}
+
+#modalContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90vw;
+  max-width: 500px;
+  height: auto;
+  max-height: 90vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  overflow: auto;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.modal-card {
+  background: var(--cream);
+  padding: 25px;
+  border-radius: 10px;
+  width: 100%;
+  min-height: 0;
+  max-height: none;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.modal-header {
+  height: max-content;
+  padding: 15px 0;
+  margin-top: 0;
+}
+
+.titleCloseIcon {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-btn {
+  border: none;
+  font-size: 25px;
+  padding: 3px 10px;
+  cursor: pointer;
+  color: black;
+  height: max-content;
+  width: max-content;
+  border-radius: 50%;
+  background-color: var(--warm);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalPara {
+  color: var(--muted);
+}
+
+.modalInput{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.modalInput label {
+  font-size: 15px;
+  font-weight:calc(15px);
+  color: var(--muted);
+}
+
+.modalInput input, .modalInput select {
+  padding: 7px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  min-height: 45px;
+  max-height: 50px;
+  box-sizing: border-box;
+}
+
+.modalInput textarea {
+  padding: 7px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  min-height: 90px;
+  max-height: 100px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-footer [type="submit"] {
+  background-color: var(--accent);
+  border-style: auto;
+}
+
+.modal-footer .reset {
+  background-color: var(--border);
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
+  #modalContainer {
+    width: 98vw;
+    max-width: 98vw;
+    height: auto;
+    max-height: 98vh;
+    border-radius: 10px;
+    padding: 0;
+  }
+  .modal-card {
+    padding: 10px;
+  }
+  .modal-footer {
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
