@@ -1,7 +1,7 @@
 /**
  * API BASE URL
  * Dynamically sets the backend API URL based on environment
- * Development: http://localhost:3000/api/r1
+ * Development: https://workconnect-o80d.onrender.com/api/r1
  * Production: https://workconnect-o80d.onrender.com/api/r1
  * 
  * To change production domain: Replace 'workconnect-o80d.onrender.com' with your actual backend domain
@@ -13,7 +13,8 @@ const getBaseUrl = () => {
         return 'https://workconnect-o80d.onrender.com/api/r1';
     }
     // Development environment
-    return 'http://localhost:3000/api/r1';
+    //https://workconnect-o80d.onrender.com
+    return 'https://workconnect-o80d.onrender.com/api/r1';
 };
 
 const BASE_URL = getBaseUrl();
@@ -40,7 +41,7 @@ export const loginUser = async (phoneNumber, password) => {
         if (!response.ok) {
             throw new Error(data.message || 'Login failed');
         }
-        
+
         return data;
     } catch (e) {
         throw e;
@@ -58,11 +59,11 @@ export const postAJob = async (jobData) => {
     try {
         // Get token from localStorage (saved by login.js)
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to post a job. Please login first.');
         }
-        
+
         // Map frontend field names to backend field names
         const mappedData = {
             title: jobData.title,
@@ -82,7 +83,7 @@ export const postAJob = async (jobData) => {
             },
             body: JSON.stringify(mappedData)
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to post job');
@@ -104,11 +105,11 @@ export const getAllJobs = async () => {
     try {
         // Get token from localStorage (saved by login.js)
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to view jobs');
         }
-        
+
         const response = await fetch(`${BASE_URL}/jobs`, {
             method: 'GET',
             headers: {
@@ -116,7 +117,7 @@ export const getAllJobs = async () => {
                 'Authorization': `Bearer ${token}` // Add token for authentication
             }
         });
-        
+
         if (!response.ok) {
             throw new Error('Failed to fetch jobs');
         }
@@ -170,7 +171,7 @@ export const registerWorker = async (workerData) => {
     try {
         // Get token from localStorage
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to register as a worker.');
         }
@@ -182,7 +183,7 @@ export const registerWorker = async (workerData) => {
             },
             body: JSON.stringify(workerData)
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to register as worker');
@@ -231,11 +232,11 @@ export const getUserPosts = async () => {
     try {
         // Get token from localStorage
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to view your posts.');
         }
-        
+
         const response = await fetch(`${BASE_URL}/jobs/user`, {
             method: 'GET',
             headers: {
@@ -243,7 +244,7 @@ export const getUserPosts = async () => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to fetch your posts');
@@ -265,11 +266,11 @@ export const getMyWorkerProfile = async () => {
     try {
         // Get token from localStorage
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in.');
         }
-        
+
         const response = await fetch(`${BASE_URL}/workers/user/profile`, {
             method: 'GET',
             headers: {
@@ -277,7 +278,7 @@ export const getMyWorkerProfile = async () => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             // User is not a worker yet
@@ -301,11 +302,11 @@ export const updateWorkerStatus = async (isBusy) => {
     try {
         // Get token from localStorage
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in.');
         }
-        
+
         const response = await fetch(`${BASE_URL}/workers/user/status`, {
             method: 'PUT',
             headers: {
@@ -314,7 +315,7 @@ export const updateWorkerStatus = async (isBusy) => {
             },
             body: JSON.stringify({ isBusy })
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to update worker status');
@@ -338,11 +339,11 @@ export const updateWorkerStatus = async (isBusy) => {
 export const submitReview = async (workerId, rating, comment = '', reviewerName = '') => {
     try {
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to submit a review');
         }
-        
+
         const response = await fetch(`${BASE_URL}/reviews`, {
             method: 'POST',
             headers: {
@@ -356,7 +357,7 @@ export const submitReview = async (workerId, rating, comment = '', reviewerName 
                 reviewerName: reviewerName.trim()
             })
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to submit review');
@@ -378,11 +379,11 @@ export const submitReview = async (workerId, rating, comment = '', reviewerName 
 export const getWorkerReviews = async (workerId) => {
     try {
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to view reviews');
         }
-        
+
         const response = await fetch(`${BASE_URL}/reviews/worker/${workerId}`, {
             method: 'GET',
             headers: {
@@ -390,7 +391,7 @@ export const getWorkerReviews = async (workerId) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to fetch reviews');
@@ -412,11 +413,11 @@ export const getWorkerReviews = async (workerId) => {
 export const getUserReviewForWorker = async (workerId) => {
     try {
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in');
         }
-        
+
         const response = await fetch(`${BASE_URL}/reviews/worker/${workerId}/my-review`, {
             method: 'GET',
             headers: {
@@ -424,7 +425,7 @@ export const getUserReviewForWorker = async (workerId) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             return null;
@@ -445,11 +446,11 @@ export const getUserReviewForWorker = async (workerId) => {
 export const getUserReviews = async () => {
     try {
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to view your reviews');
         }
-        
+
         const response = await fetch(`${BASE_URL}/reviews/user/my-reviews`, {
             method: 'GET',
             headers: {
@@ -457,7 +458,7 @@ export const getUserReviews = async () => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to fetch your reviews');
@@ -478,11 +479,11 @@ export const getUserReviews = async () => {
 export const deleteReview = async (reviewId) => {
     try {
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             throw new Error('You must be logged in to delete a review');
         }
-        
+
         const response = await fetch(`${BASE_URL}/reviews/${reviewId}`, {
             method: 'DELETE',
             headers: {
@@ -490,7 +491,7 @@ export const deleteReview = async (reviewId) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Failed to delete review');
