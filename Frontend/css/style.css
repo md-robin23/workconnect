@@ -1,3 +1,4 @@
+/* Global body styles */
 body {
     margin: 0;
     padding: 0;
@@ -5,6 +6,7 @@ body {
     width: 100%;
 }
 
+/* CSS custom properties for colors */
 :root {
     --ink: #0f0e0c;
     --cream: #f5f0e8;
@@ -18,6 +20,7 @@ body {
     --blue: #1d4e89;
 }
 
+/* Header bar with logo and navigation */
 .title-bar {
     width: 100%;
     height: 75px;
@@ -30,33 +33,43 @@ body {
     box-sizing: border-box;
 }
 
+/* Container for navigation buttons */
 .title-bar .right {
     display: flex;
     gap: 20px;
 }
 
+/* Accent color for highlighted text */
 .title-color {
     color: var(--accent);
 }
 
+/* Styles for sign up and log in buttons */
 .title-bar .right  h3 a {
- background-color: var(--accent);
- color: var(--card);
+ background: linear-gradient(135deg, var(--card) 0%, var(--warm) 100%);
+ color: var(--ink);
  width: 100px;
  height: 35px;
  border-radius: 20px;
+ border: 1px solid var(--border);
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
  text-decoration: none;
 
  display: flex;
  justify-content: center;
  align-items: center;
  cursor: pointer;
+ transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.title-bar .right h3:hover {
-    background-color: var(--accent2);
+/* Hover effect for buttons */
+.title-bar .right h3:hover a {
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Website info banner */
 .webInfo p {
     display: flex;
     justify-content: center;
@@ -70,85 +83,284 @@ body {
     margin-left: 20px;
 }
 
+/* Main content container */
 .parant-front-page {
     width: 100%;
-    height: 32rem;
-    /* background-color: #1d4e89; */
+    height: auto;
     display: flex;
     flex-direction: row;
-    gap: 6%;
-    padding: 5px;
+    gap: 2.5%;
+    padding: 10px 10px 5px;
     box-sizing: border-box;
+    align-items: flex-start;
 }
 
+/* Title section */
 .title-of-frontpage {
     width: 60%;
-    /* background-color: #0f0e0c; */
-    /* color: white; */
-    height: 28rem;
-    margin: 10px;
-    padding: 15px;
+    height: auto;
+    margin: 0;
+    padding: 10px 15px 5px;
 }
 
-.title-of-frontpage pre{
+.title-of-frontpage h1 {
     font-family: 'DM Sans', sans-serif;
-    font-size: 100px;
-    margin-top: 0;
-    margin-left: 40px;
+    font-size: 72px;
+    line-height: 0.95;
+    margin: 0;
+    color: var(--ink);
 }
 
+.title-of-frontpage .hero-strap {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    line-height: 1.7;
+    margin-top: 18px;
+    max-width: 680px;
+    color: var(--muted);
+}
+
+.hero-copy {
+    margin: 0 40px 20px;
+    max-width: 720px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+.hero-copy p {
+    margin: 0 0 10px;
+}
+
+/* Job statistics container */
 .job-info {
     width: 27%;
     background-color: #0f0e0c;
     border-radius: 21px;
     height: 6rem;
-    margin-top: 40px;
+    margin: 0 0 0 0;
     margin-right: 31px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    /* align-items: center; */
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
 }
 
+/* Job details text */
 .job-info .details {
     color: #f0f0f0;
     margin-top: 0;
+    font-size: 14px;
 }
 
+/* Job count numbers */
 .job-info .digit {
     color: var(--accent2);
     font-size: 28px;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
-.job-info .active-jobs {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
+/* Active jobs and total workers sections */
+.job-info .active-jobs,
 .job-info .total-workers {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex: 1;
 }
 
-.job-info .completed-jobs {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+/* Hover effect for job stat sections */
+.job-info .active-jobs:hover,
+.job-info .total-workers:hover {
+    background-color: rgba(245, 162, 35, 0.2);
+    transform: scale(1.05);
+}
+
+/* Hidden state for job stat sections */
+.job-info .active-jobs.hidden,
+.job-info .total-workers.hidden {
+    display: none;
 }
 
 .title-color {
     color: var(--accent);
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    .parant-front-page {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .title-of-frontpage {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .title-of-frontpage pre {
+        font-size: 50px;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .job-info {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .job-info .active-jobs,
+    .job-info .total-workers {
+        flex: none;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .title-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .title-bar .right {
+        gap: 1rem;
+    }
+
+    .webInfo p {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-of-frontpage pre {
+        font-size: 40px;
+    }
+
+    .job-info .digit {
+        font-size: 24px;
+    }
+
+    .job-info .details {
+        font-size: 12px;
+    }
+}
+
+/* Contributors section */
+.contributors {
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 0 20px;
+}
+
+.contributors h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 34px;
+    color: var(--ink);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 24px;
+    justify-items: center;
+}
+
+.contributor-card {
+    width: 100%;
+    max-width: 320px;
+    background-color: #fff;
+    border-radius: 24px;
+    padding: 24px 20px;
+    box-shadow: 0 18px 40px rgba(15, 14, 12, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    animation: cardFadeIn 0.7s ease forwards;
+    will-change: transform, box-shadow;
+    cursor: pointer;
+}
+
+.contributor-card:hover {
+    transform: translateY(-14px) scale(1.04);
+    box-shadow: 0 38px 70px rgba(15, 14, 12, 0.18);
+    border-color: rgba(232, 93, 47, 0.35);
+}
+
+.contributor-card:hover img {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 6px rgba(232, 93, 47, 0.12);
+}
+
+@keyframes cardFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contributor-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent2);
+    margin-bottom: 18px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--ink);
+}
+
+.card-info .role {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+}
+
+.card-note {
+    margin: 14px 0 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .contributors-grid {
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .contributors-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,48 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
+<!-- Sign Up Page - User registration with phone verification -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
-    <link rel="stylesheet" href="../css/signin.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="title">
-        <h2>Jobify</h2>
-        <p>Start your journey now with us.</p>
-      </div>
-      <div class="formContainer">
-              <div class="childFormContainer">
-        <h3>Create an account</h3>
-        <input
-          type="tel"
-          id="number"
-          placeholder="Enter phone number"
-          maxlength="11"
-          minlength="11"
-          pattern="[0-9]" {11}
-          inputmode="numeric"
-          autofocus
-        />
-
-        <button id="sendOtp" disabled>Send OTP</button>
-
-        <div class="otpBox">
-          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
-          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
-          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
-          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
-          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
-          <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+<head>
+    <!-- Document metadata and external resources -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Workconnect</title>
+    <!-- Font Awesome icons for UI elements -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main stylesheet for signup page -->
+    <link rel="stylesheet" href="../css/signin.css">
+    <!-- Firebase SDK for authentication -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <!-- MAIN CONTAINER - Two-column layout for signup page -->
+    <div class="signup-container">
+      <!-- LEFT SIDE - BRANDING & MESSAGE - Company branding and feature highlights -->
+      <div class="signup-branding">
+        <div class="branding-content">
+          <!-- Logo and main heading -->
+          <div class="logo">
+            <!-- Briefcase icon representing work/job platform -->
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <!-- Company name -->
+          <h1>Workconnect</h1>
+          <!-- Tagline for the platform -->
+          <p class="tagline">Start your journey now with us.</p>
+          <!-- Feature highlights - Benefits of joining the platform -->
+          <div class="features">
+            <!-- Feature 1: Profile creation -->
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Create your professional profile</span>
+            </div>
+            <!-- Feature 2: Job matching -->
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Find opportunities that match your skills</span>
+            </div>
+            <!-- Feature 3: Community -->
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Join a community of professionals</span>
+            </div>
+          </div>
         </div>
-
-        <button id="confirmOtp" disabled>Confirm OTP</button>
-      </div>
       </div>
 
+      <!-- RIGHT SIDE - SIGNUP FORM - User registration form with phone verification -->
+      <div class="signup-form-wrapper">
+        <div class="signup-form">
+          <!-- Form heading -->
+          <h2>Join Us Today</h2>
+          <!-- Form subtitle -->
+          <p class="form-subtitle">Create your account to get started</p>
+
+          <!-- Signup form with validation -->
+          <form id="signupForm">
+            <!-- Phone number input field -->
+            <div class="form-group">
+              <!-- Label for phone number input -->
+              <label for="number">Phone Number</label>
+              <div class="input-wrapper">
+                <!-- Phone icon for visual indication -->
+                <i class="fas fa-phone"></i>
+                <!-- Phone number input with validation attributes -->
+                <input
+                  type="tel"
+                  id="number"
+                  class="form-input"
+                  placeholder="Enter phone number"
+                  maxlength="11"
+                  minlength="11"
+                  pattern="[0-9]{11}"
+                  inputmode="numeric"
+                  autofocus
+                  required
+                />
+              </div>
+              <!-- Error message container for phone validation -->
+              <span class="error-message" id="numberError"></span>
+            </div>
+
+            <!-- OTP input section (shown after sending OTP) -->
+            <div class="otp-section" id="otpSection" style="display: none;">
+              <!-- Label for OTP inputs -->
+              <label>Enter OTP</label>
+              <div class="otp-container">
+                <div class="otp-inputs">
+                  <!-- Individual OTP digit inputs (6 inputs for 6-digit OTP) -->
+                  <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+                  <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+                  <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+                  <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+                  <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+                  <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*"/>
+                </div>
+              </div>
+              <!-- Error message container for OTP validation -->
+              <span class="error-message" id="otpError"></span>
+            </div>
+
+            <!-- Password input section (shown after OTP verification) -->
+            <div class="password-section" id="passwordSection" style="display: none;">
+              <!-- Label for password input -->
+              <label for="password">Password</label>
+              <div class="input-wrapper">
+                <!-- Lock icon for visual indication -->
+                <i class="fas fa-lock"></i>
+                <!-- Password input with validation -->
+                <input
+                  type="password"
+                  id="password"
+                  class="form-input"
+                  placeholder="Enter password"
+                  minlength="6"
+                  required
+                />
+              </div>
+              <!-- Error message container for password validation -->
+              <span class="error-message" id="passwordError"></span>
+            </div>
+
+            <!-- Send OTP / Confirm OTP / Create Account buttons -->
+            <div class="button-group">
+              <!-- Send OTP button - Initially visible, sends OTP to phone number -->
+              <button type="button" class="signup-button" id="sendOtp">
+                <span id="sendOtpText">Send OTP</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+              <!-- Confirm OTP button - Shown after OTP is sent, verifies the entered OTP -->
+              <button type="button" class="signup-button secondary" id="confirmOtp" style="display: none;">
+                <span>Verify OTP</span>
+                <i class="fas fa-check"></i>
+              </button>
+              <!-- Create Account button - Shown after OTP verification, submits phone and password -->
+              <button type="button" class="signup-button" id="createAccount" style="display: none;">
+                <span>Create Account</span>
+                <i class="fas fa-user-plus"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Login link - Redirect to login page for existing users -->
+          <div class="login-link">
+            <p>Already have an account? <a href="login.html">Log in here</a></p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script src="../js/signin.js"></script>
-  </body>
+    <!-- Signup script - Handles registration and OTP verification -->
+    <script type="module" src="../js/signin.js?v=2"></script>
+</body>
 </html>

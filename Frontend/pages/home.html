@@ -4,44 +4,145 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
+  <title>Home - Workconnect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../css/home.css" />
 </head>
 
 <body>
-  <div class="homeContainer">
+  <div class="mainWrapper">
+    <!-- MOBILE MENU BUTTON - Toggles sidebar on mobile devices -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- SIDEBAR NAVIGATION - Fixed navigation menu with job/worker categories and user account options -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3 class="sidebar-title">Menu</h3>
+        <!-- Close button for mobile sidebar -->
+        <button class="sidebar-close" id="sidebarClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <!-- Browse Section - Navigation items for browsing jobs, workers, and user posts -->
+        <div class="nav-section">
+          <h4 class="nav-section-title">Browse</h4>
+          <ul class="nav-menu">
+            <!-- Jobs Category Button -->
+            <li class="nav-item jobs-item category-btn" data-category="jobs">
+              <a href="#" class="nav-link">
+                <span class="nav-icon">
+                  <i class="fas fa-briefcase"></i>
+                </span>
+                <span class="nav-text">Jobs</span>
+              </a>
+            </li>
+            <!-- Workers Category Button -->
+            <li class="nav-item workers-item category-btn" data-category="workers">
+              <a href="#" class="nav-link">
+                <span class="nav-icon">
+                  <i class="fas fa-users"></i>
+                </span>
+                <span class="nav-text">Workers</span>
+              </a>
+            </li>
+            <!-- My Posts Category Button - Shows user's own job postings -->
+            <li class="nav-item myPost-item category-btn" data-category="mypost">
+              <a href="#" class="nav-link">
+                <span class="nav-icon">
+                  <i class="fas fa-file-alt"></i>
+                </span>
+                <span class="nav-text">My Posts</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Account Section - User account and worker registration options -->
+        <div class="nav-section">
+          <h4 class="nav-section-title">Account</h4>
+          <ul class="nav-menu">
+            <!-- Register as Worker Link - Opens worker registration modal -->
+            <li class="nav-item become-worker-item" id="becomeWorkerSidebar">
+              <a href="#" class="nav-link worker-link">
+                <span class="nav-icon">
+                  <i class="fas fa-user-tie"></i>
+                </span>
+                <span class="nav-text">Register as Worker</span>
+              </a>
+            </li>
+            <!-- Worker Busy Status Toggle - Shows only if user is registered as worker -->
+            <li class="nav-item busy-toggle-item hidden" id="busyToggleItem" style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
+              <span style="color: #666; font-weight: 500;">Busy Status</span>
+              <!-- Toggle Switch for busy/available status -->
+              <div class="toggle" id="busyToggle" style="width: 40px; height: 24px; background-color: #ccc; border-radius: 12px; position: relative; cursor: pointer; transition: background-color 0.3s;">
+                <div class="circle" style="position: absolute; width: 20px; height: 20px; background-color: white; border-radius: 50%; top: 2px; left: 2px; transition: left 0.3s;"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer - Displays contact information and logout option -->
+      <div class="sidebar-footer">
+        <!-- Contact with Us Section -->
+        <div class="contact-info-sidebar copy-phone" style="cursor: pointer;" onclick="copyToClipboard('01813233767', this)">
+          <h4>Contact with Us</h4>
+          <p class="phone-number">📞 01813233767</p>
+        </div>
+        
+        <div class="user-info" id="userInfo">
+          <div class="user-avatar">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+          <div class="user-details">
+            <a href="./login.html" class="logout-link">Log out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- SIDEBAR OVERLAY - Semi-transparent overlay when sidebar is open on mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- MAIN CONTENT CONTAINER - Displays jobs, workers, or user posts based on selected category -->
+    <div class="homeContainer">
+      <div class="demoJobContainer" id="demoJobContainer">
+      </div>
+    </div>
+
+    <!-- PAGE HEADER - Title and search bar -->
     <div class="title">
-      <h1>Jobify</h1>
-
-      <input type="search" placeholder="search your catagory" />
+      <h1>Workconnect</h1>
+      <!-- Search Input - Filters jobs/workers based on user input -->
+      <input type="search" placeholder="search your category" />
     </div>
 
-    <div class="catagory">
-      <button class="jobs catagoryButton">Jobs</button>
-      <button class="workers catagoryButton">Workers</button>
-      <button class="myPost catagoryButton">My Posts</button>
-    </div>
-    <div class="postJob">
-      <p> + Post a Job</p>
-    </div>
-
-    <div class="demoJobContainer" id="demoJobContainer">
+    <!-- POST A JOB BUTTON - Opens job posting modal -->
+    <div class="postJob" id="postJobBtn">
+      <p>+ Post a Job</p>
     </div>
   </div>
 
+  <!-- JOB POSTING MODAL - Form for creating a new job posting -->
   <div class="modalContainer hidden" id="modalContainer">
     <div class="modal-card">
       <div class="modal-header">
         <div class="titleCloseIcon">
           <h2>Post a Job</h2>
+          <!-- Close button for modal -->
           <button class="close-btn">&times;</button>
         </div>
         <p class="modalPara">Describe what you need — workers will reach out.</p>
       </div>
+      <!-- Job posting form with fields for title, category, description, budget, urgency, location, contact -->
       <form action="" method="post">
         <div class="jobTitleInfo modalInput">
           <label for="jobTitle">JOB TITLE</label>
-          <input type="text" placeholder="e.g. Fix leaking bathroom pipe" required />
+          <input type="text" id="jobTitle" placeholder="e.g. Fix leaking bathroom pipe" required />
         </div>
 
         <div class="categoryInfo modalInput">
@@ -58,6 +159,11 @@
             <option value="cooking">🍳 Cooking</option>
             <option value="other">🛠 Other</option>
           </select>
+        </div>
+
+        <div class="jobPosterName modalInput">
+          <label for="posterName">JOB POSTER NAME</label>
+          <input type="text" name="posterName" id="posterName" required />
         </div>
 
         <div class="jobDescriptionInfo modalInput">
@@ -97,7 +203,151 @@
       </form>
     </div>
   </div>
-  <script src="../js/home.js">
+
+  <!-- WORKER REGISTRATION MODAL - Form for user to register as a worker -->
+  <div class="workerModalContainer hidden" id="workerModalContainer">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="titleCloseIcon">
+          <h2>Become a Worker</h2>
+          <!-- Close button for modal -->
+          <button class="close-btn worker-close-btn">&times;</button>
+        </div>
+        <p class="modalPara">Join our platform and start offering your services.</p>
+      </div>
+      <!-- Worker registration form with fields for name, skills, bio, hourly rate, phone number -->
+      <form id="workerForm" action="" method="post">
+        <div class="workerNameInfo modalInput">
+          <label for="workerName">FULL NAME</label>
+          <input type="text" placeholder="e.g. John Doe" id="workerName" name="name" required />
+        </div>
+
+        <div class="workerSkillsInfo modalInput">
+          <label>SKILLS (Select all that apply)</label>
+          <div class="skills-checkbox-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="cleaning" /> 🧹 Cleaning
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="moving" /> 🚚 Moving
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="gardening" /> 🌿 Gardening
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="plumbing" /> 🔧 Plumbing
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="electrical" /> ⚡ Electrical
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="painting" /> 🎨 Painting
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="tech help" /> 💻 Tech Help
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="tutoring" /> 📚 Tutoring
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <input type="checkbox" name="skills" value="cooking" /> 🍳 Cooking
+            </label>
+          </div>
+        </div>
+
+        <div class="workerBioInfo modalInput">
+          <label for="workerBio">BIO/DESCRIPTION</label>
+          <textarea name="bio" id="workerBio"
+            placeholder="Tell us about your experience and expertise..." required></textarea>
+        </div>
+
+        <div class="workerHourlyRateInfo modalInput">
+          <label for="workerHourlyRate">HOURLY RATE (৳)</label>
+          <input type="number" placeholder="e.g. 500" id="workerHourlyRate" name="hourly_rate" min="0" required />
+        </div>
+
+        <div class="workerLocationsInfo modalInput">
+          <label for="workerLocations">AVAILABLE LOCATIONS</label>
+          <input type="text" placeholder="e.g. Dhaka, Chattogram" id="workerLocations" name="locations" required />
+          <small style="color: #999; margin-top: 4px; display: block;">Enter multiple locations separated by commas.</small>
+        </div>
+
+        <div class="workerContactInfo modalInput">
+          <label for="workerPhoneNumber">PHONE NUMBER</label>
+          <input type="tel" placeholder="01*********" required name="phone_number" id="workerPhoneNumber" />
+        </div>
+
+        <div class="modal-footer">
+          <button type="reset" class="reset">Cancel</button>
+          <button type="submit">Register as Worker →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- REVIEW MODAL - Form for user to submit a review for a worker -->
+  <div class="reviewModalContainer hidden" id="reviewModalContainer">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="titleCloseIcon">
+          <h2>Review Worker</h2>
+          <!-- Close button for modal -->
+          <button class="close-btn review-close-btn">&times;</button>
+        </div>
+        <p class="modalPara">Share your experience with this worker.</p>
+      </div>
+      <!-- Review submission form with rating and comment fields -->
+      <form id="reviewForm" action="" method="post">
+        <input type="hidden" id="reviewWorkerId" name="workerId" />
+        <div id="reviewWorkerRatingSummary" style="margin-bottom: 16px; font-size: 0.95rem; color: #333; font-weight: 600;">Loading rating info...</div>
+        <div class="reviewNameInfo modalInput">
+          <label for="reviewerNameInput">YOUR NAME</label>
+          <input id="reviewerNameInput" name="reviewerName" type="text" placeholder="Enter your name" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; background: white;" />
+        </div>
+
+        <div class="reviewRatingInfo modalInput">
+          <label for="reviewRatingInput">RATING (1.0 - 5.0)</label>
+          <div style="margin-top: 8px;">
+            <input id="reviewRatingInput" name="rating" type="number" min="1" max="5" step="0.1" placeholder="e.g. 3.3" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; background: white;" />
+          </div>
+          <div id="selectedRatingDisplay" style="margin-top: 10px; font-weight: bold; color: #666;">Select a rating</div>
+        </div>
+
+        <div class="reviewCommentInfo modalInput">
+          <label for="reviewComment">COMMENT (Optional)</label>
+          <textarea name="comment" id="reviewComment" placeholder="Share your experience with this worker..." maxlength="500" style="resize: vertical;"></textarea>
+          <small style="color: #999; margin-top: 4px; display: block;"><span id="charCount">0</span>/500 characters</small>
+        </div>
+
+        <div class="modal-footer">
+          <button type="reset" class="reset">Cancel</button>
+          <button type="submit">Submit Review →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- REVIEWS DISPLAY MODAL - Shows all reviews for a worker -->
+  <div class="reviewsDisplayModalContainer hidden" id="reviewsDisplayModalContainer">
+    <div class="modal-card" style="max-height: 80vh; overflow-y: auto;">
+      <div class="modal-header">
+        <div class="titleCloseIcon">
+          <h2 id="reviewsWorkerName">Worker Reviews</h2>
+          <!-- Close button for modal -->
+          <button class="close-btn reviews-display-close-btn">&times;</button>
+        </div>
+      </div>
+      <!-- Reviews list container -->
+      <div id="reviewsList" style="padding: 20px;">
+        <!-- Reviews will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT WITH US SECTION - Removed, now integrated in sidebar footer -->
+
+  <!-- Main application script - Handles all client-side functionality -->
+  <script type="module" src="../js/home.js">
   </script>
 </body>
 

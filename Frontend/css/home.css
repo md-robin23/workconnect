@@ -1,9 +1,11 @@
+/* Universal reset - Removes default margins, padding, and sets box-sizing for all elements */
 * {
   padding: 0;
   margin: 0;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
 
+/* CSS VARIABLES - Color scheme and spacing constants */
 :root {
   --ink: #0f0e0c;
   --cream: #f5f0e8;
@@ -15,47 +17,477 @@
   --border: #d9d3c7;
   --green: #2d6a4f;
   --blue: #1d4e89;
+  --transition: all 0.3s ease;
+  --primary-dark: #0f1419;
+  --sidebar-width: 240px;
+  --sidebar-collapsed: 70px;
 }
 
+/* HTML element - Enables smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body element - Sets background color, font family, and layout properties for the entire page */
 body {
   background-color: var(--cream);
-  padding: 10px;
+  padding: 0;
   position: relative;
-  max-width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  width: 100%;
+  margin: 0;
+}
+
+/* ========================================
+   MOBILE MENU - Mobile responsive menu toggle button
+   ======================================== */
+/* Mobile menu toggle button - Hamburger menu button for mobile devices */
+.mobile-menu-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  border: none;
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(232, 93, 47, 0.3);
+  transition: var(--transition);
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover state for mobile menu toggle */
+.mobile-menu-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(232, 93, 47, 0.4);
+}
+
+/* Media query for mobile devices - Shows the toggle button on screens smaller than 768px */
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+/* ========================================
+   SIDEBAR NAVIGATION - Fixed left sidebar with navigation menu
+   ======================================== */
+/* Main sidebar container - Fixed position sidebar on the left side */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 180px;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: linear-gradient(180deg, #1e2936 0%, #151c26 100%);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  transition: var(--transition);
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
-html {
-  max-width: 100vw;
-  overflow-x: hidden;
+/* Sidebar Header */
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+/* Sidebar title text */
+.sidebar-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Sidebar close button - For mobile overlay */
+.sidebar-close {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+/* Hover state for sidebar close button */
+.sidebar-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  flex: 1;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Navigation Section */
+.nav-section {
+  padding: 0 12px;
+}
+
+/* Navigation section title */
+.nav-section-title {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 12px 12px 12px;
+  margin: 0;
+}
+
+/* Navigation menu list */
+.nav-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Navigation Items */
+.nav-item {
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation link styling */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: var(--transition);
+  font-weight: 500;
+  font-size: 15px;
+  border-left: 3px solid transparent;
+}
+
+/* Hover state for navigation links */
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+  padding-left: 20px;
+}
+
+/* Navigation icon container */
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  font-size: 18px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+/* Navigation text */
+.nav-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Active State */
+/* Active navigation item styling - Highlights the currently selected menu item */
+.nav-item.active .nav-link {
+  background: linear-gradient(90deg, rgba(232, 93, 47, 0.2) 0%, transparent 100%);
+  color: white;
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Active navigation icon styling */
+.nav-item.active .nav-icon {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* Worker Link Styling */
+/* Special styling for worker-related navigation links */
+.worker-link {
+  background: linear-gradient(90deg, rgba(45, 106, 79, 0.15) 0%, transparent 100%);
+  border-left-color: var(--green);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Hover state for worker links */
+.worker-link:hover {
+  background: linear-gradient(90deg, rgba(45, 106, 79, 0.25) 0%, transparent 100%);
+  border-left-color: var(--green);
+  color: white;
+}
+
+/* Sidebar Footer - User Info */
+/* Footer section of the sidebar containing user information */
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Contact info sidebar section */
+.contact-info-sidebar {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+}
+
+.contact-info-sidebar h4 {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-info-sidebar .phone-number {
+  color: var(--accent2);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* User info container - Displays current user details */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+/* Hover state for user info */
+.user-info:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* User avatar container */
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  color: white;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* User details container */
+.user-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+/* User name text */
+.user-name {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* User status text */
+.user-status {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sidebar Overlay for Mobile */
+/* Overlay background for mobile sidebar */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  transition: var(--transition);
+}
+
+/* Active state for sidebar overlay */
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* Scrollbar Styling */
+/* Custom scrollbar for sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive: Tablet */
+/* Media query for tablet devices - Adjusts sidebar width and navigation link padding */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 220px;
+  }
+
+  .nav-link {
+    padding: 10px 14px;
+  }
+
+  .nav-text {
+    font-size: 14px;
+  }
+}
+
+/* Responsive: Mobile */
+/* Media query for mobile devices - Transforms sidebar into overlay and adjusts layout */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 100%;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #1e2936 0%, #151c26 100%);
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .sidebar-header {
+    padding: 15px 20px;
+  }
+
+  .sidebar-close {
+    display: flex;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  .sidebar-content {
+    padding: 20px 0;
+    gap: 20px;
+  }
+
+  .nav-link {
+    padding: 12px 16px;
+  }
+}
+
+/* ========================================
+   MAIN LAYOUT - Main wrapper and page title header
+   ======================================== */
+/* Main wrapper container - Flex layout for the entire page */
+.mainWrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  gap: 0;
+}
+
+/* PAGE TITLE/HEADER - Fixed top header with branding and search */
+/* Title container - Fixed header at the top of the page */
 .title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  min-height: 18vh;
+  height: 120px;
   width: 100%;
   background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
   color: var(--cream);
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(232, 93, 47, 0.08);
-  margin-bottom: 24px;
-  padding: 24px 10px;
+  box-shadow: 0 4px 24px rgba(232, 93, 47, 0.15);
+  padding: 20px 10px;
   text-align: center;
+  box-sizing: border-box;
+  z-index: 10;
 }
 
-.title h1{ 
+/* Title heading */
+.title h1 {
   color: var(--cream);
   margin-bottom: 12px;
   font-size: 2.2rem;
   font-weight: bold;
   letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 0;
 }
 
+/* Search input field in the title */
 .title input {
   width: 60%;
   max-width: 400px;
@@ -67,9 +499,16 @@ html {
   font-size: 1rem;
   margin-top: 10px;
   transition: border 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: white;
 }
 
+/* Placeholder text styling for search input */
+.title input::placeholder {
+  color: #b0bac9;
+}
+
+/* Focus state for search input */
 .title input:focus {
   outline: none;
   border-color: var(--accent2);
@@ -77,206 +516,371 @@ html {
   background: var(--card);
 }
 
-@media (max-width: 900px) {
-  .title {
-    min-height: 14vh;
-    padding: 18px 5px;
-  }
-  .title h1 {
-    font-size: 1.5rem;
-  }
-  .title input {
-    width: 80%;
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 600px) {
-  html, body {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-  .title {
-    min-height: 10vh;
-    padding: 12px 2px;
-    border-radius: 8px;
-  }
-  .title h1 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-  }
-  .title input {
-    width: 98%;
-    min-width: 0;
-    font-size: 0.9rem;
-    height: 38px;
-  }
-}
-
-.catagory {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-
-  min-height: 6vh;
-  max-height: 9vh;
-  min-width: 20%;
-  max-width: 25%;
-
-  background-color: var(--border);
-  border-radius: 10px;
-  margin: 10px;
-}
-
+/* POST JOB BUTTON - Fixed floating action button */
+/* Floating action button for posting a new job */
 .postJob {
-  height: 40px;
-  width: 100px;
-  background-color: var(--accent);
-
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 44px;
+  width: fit-content;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 25px;
   font-weight: bold;
-  position: fixed;
-  bottom: 10%;
-  left: 50%;
   cursor: pointer;
-  padding: 5px 30px;
+  padding: 8px 30px;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(232, 93, 47, 0.3);
+  z-index: 90;
+  border: none;
+  font-size: 16px;
 }
 
-.catagoryButton {
-  border-style: none;
-  background-color: var(--border);
-  color: var(--muted);
+/* Hover state for post job button */
+.postJob:hover {
+  background: linear-gradient(135deg, #d64a2a 0%, #e69a00 100%);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 93, 47, 0.4);
 }
 
-.category3 {
-  /* min-height: 5vh;
-  max-height: 8vh; */
-  height: fit-content;
-  width: fit-content;
-  background-color: white;
-  border-radius: 8px;
-  color: var(--ink);
-  font-weight: bold;
-  padding: 7px 17px;
+/* Active state for post job button */
+.postJob:active {
+  transform: translateX(-50%) translateY(0);
 }
 
-@media (max-width: 753px) {
-  .catagory {
-    flex-direction: column;
-    height: fit-content;
-    width: 27%;
-    gap: 7px;
-    background-color: white;
-  }
-
-  .category3 {
-    padding: 5px 0;
-    font-size: 15px;
-    color: var(--ink);
-    font-weight: normal
-  }
+/* Hidden busy toggle container */
+.busyToggleContainer {
+  display: none !important;
 }
 
+/* ========================================
+   MAIN CONTENT - Home container and job grid layout
+   ======================================== */
+/* Home container - Main content area with margin for sidebar */
+.homeContainer {
+  margin-left: 240px;
+  padding: 20px;
+  padding-left: 30px;
+  padding-top: 220px;
+  box-sizing: border-box;
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* JOB AND WORKER CARDS GRID - Responsive grid layout for displaying jobs and workers */
+/* Grid container for job and worker cards */
 .demoJobContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 10px;
-  margin: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  auto-rows: max-content;
   width: 100%;
-  box-sizing: border-box;
 }
 
+/* Responsive Grid Layout */
+/* Grid layout for large screens (up to 1920px) - 3 columns */
+@media (max-width: 1920px) {
+  .demoJobContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Grid layout for medium screens (up to 1200px) - 2 columns */
+@media (max-width: 1200px) {
+  .demoJobContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Grid layout for small screens (up to 900px) - 1 column, adjusts sidebar and container */
+@media (max-width: 900px) {
+  .demoJobContainer {
+    grid-template-columns: 1fr;
+  }
+
+  :root {
+    --sidebar-width: 200px;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .homeContainer {
+    margin-left: 200px;
+    padding-top: 220px;
+  }
+}
+
+/* Grid layout for mobile screens (up to 768px) - 1 column, removes sidebar margin */
+@media (max-width: 768px) {
+  .title {
+    height: 140px;
+    padding: 12px 10px;
+  }
+
+  .title h1 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .title input {
+    width: 90%;
+    min-width: auto;
+    font-size: 0.95rem;
+    height: 40px;
+  }
+
+  .demoJobContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .homeContainer {
+    margin-left: 0;
+    padding: 15px;
+    padding-top: 170px;
+    overflow-x: hidden;
+  }
+
+  .mobile-menu-toggle {
+    top: 12px;
+    left: 12px;
+  }
+}
+
+/* ========================================
+   CARD STYLING - Job and worker card styles
+   ======================================== */
+/* Job card container - Individual job posting card */
 .jobCard {
   width: 100%;
-  min-height: 250px;
+  height: 100%;
   background-color: var(--card);
-  padding: 15px;
+  padding: 20px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
 }
 
+/* Hover state for job card */
+.jobCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(232, 93, 47, 0.12);
+  border-color: var(--accent);
+}
+
+/* Job card heading */
+.jobCard h3 {
+  margin: 12px 0 8px 0;
+  font-size: 1.1rem;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Job card paragraph text */
+.jobCard p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Category and urgency container */
 .categoryUrgency {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  min-height: 60px;
+  gap: 10px;
+  margin-bottom: 8px;
+  align-items: flex-start;
 }
 
+/* Category and urgency span elements */
+.categoryUrgency span {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+}
+
+/* Worker card container - Individual worker profile card */
 .workerCard {
   width: 100%;
-  min-height: 250px;
+  height: 100%;
   background-color: var(--card);
-  padding: 15px;
+  padding: 20px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  cursor: pointer;
 }
 
+/* Hover state for worker card */
+.workerCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(232, 93, 47, 0.12);
+  border-color: var(--accent);
+}
+
+/* Worker card heading */
+.workerCard h3 {
+  margin: 12px 0 6px 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Worker card paragraph text */
+.workerCard p {
+  margin: 6px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Post card container - Individual post card */
 .postCard {
   width: 100%;
-  min-height: 250px;
+  height: 100%;
   background-color: var(--card);
-  padding: 15px;
+  padding: 20px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
 }
 
+/* Hover state for post card */
+.postCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(232, 93, 47, 0.12);
+  border-color: var(--accent);
+}
+
+/* Blurred state for cards */
 .isBlurred {
   filter: blur(3px);
-  pointer-events: all;
+  pointer-events: none;
 }
 
-#modalContainer{
+/* Modal container - Full screen overlay for modals */
+#modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 90vw;
-  max-width: 500px;
-  height: auto;
-  max-height: 90vh;
-  background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
-  overflow: auto;
-  border-radius: 20px;
+  padding: 20px;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
+/* Modal card inside modal container */
+#modalContainer .modal-card {
+  background: var(--cream);
+  padding: 25px;
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 500px;
+  height: 85vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* General modal card styling */
 .modal-card {
   background: var(--cream);
   padding: 25px;
-  border-radius: 10px;
-  width: 100%;
-  min-height: 0;
-  max-height: none;
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
   box-sizing: border-box;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
+/* Hidden class for modals */
 .hidden {
   display: none !important;
 }
 
+/* Review modal container - Full screen overlay for review modal */
+#reviewModalContainer,
+#reviewsDisplayModalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+#reviewModalContainer .modal-card,
+#reviewsDisplayModalContainer .modal-card {
+  background: var(--cream);
+  padding: 25px;
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal header container */
 .modal-header {
   height: max-content;
   padding: 15px 0;
   margin-top: 0;
 }
 
+/* Title and close icon container */
 .titleCloseIcon {
   display: flex;
   justify-content: space-between;
 }
 
+/* Close button for modal */
 .close-btn {
   border: none;
   font-size: 25px;
@@ -292,22 +896,26 @@ html {
   align-items: center;
 }
 
+/* Modal paragraph text */
 .modalPara {
   color: var(--muted);
 }
 
+/* Modal input container */
 .modalInput{
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
 }
 
+/* Modal input label */
 .modalInput label {
   font-size: 15px;
-  font-weight:calc(15px);
+  font-weight: 600;
   color: var(--muted);
 }
 
+/* Modal input fields (input, select) */
 .modalInput input, .modalInput select {
   padding: 7px;
   border-radius: 10px;
@@ -317,6 +925,7 @@ html {
   box-sizing: border-box;
 }
 
+/* Modal textarea */
 .modalInput textarea {
   padding: 7px;
   border-radius: 10px;
@@ -325,30 +934,53 @@ html {
   max-height: 100px;
 }
 
+/* Modal footer container */
 .modal-footer {
   display: flex;
   justify-content: space-between;
-  padding: 10px 30px;
+  gap: 10px;
+  padding: 15px 0;
+  margin-top: 15px;
+  border-top: 1px solid var(--border);
 }
 
+/* Modal footer buttons */
 .modal-footer button {
   padding: 10px 20px;
   border-radius: 14px;
   border: none;
   cursor: pointer;
   font-weight: bold;
+  flex: 1;
+  transition: all 0.3s ease;
 }
 
+/* Submit button styling */
 .modal-footer [type="submit"] {
   background-color: var(--accent);
-  border-style: auto;
+  color: white;
+  border: none;
 }
 
+/* Hover state for submit button */
+.modal-footer [type="submit"]:hover {
+  background-color: #d64a2a;
+}
+
+/* Reset button styling */
 .modal-footer .reset {
+  background-color: var(--warm);
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+/* Hover state for reset button */
+.modal-footer .reset:hover {
   background-color: var(--border);
 }
 
 /* Responsive for small screens */
+/* Media query for small screens - Adjusts modal size and layout */
 @media (max-width: 600px) {
   #modalContainer {
     width: 98vw;
@@ -360,10 +992,116 @@ html {
   }
   .modal-card {
     padding: 10px;
+    /* cursor: default; */
   }
   .modal-footer {
     padding: 10px;
     flex-direction: column;
     gap: 10px;
   }
+}
+
+/* Category become worker container */
+.categoryBecomeWorker {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Become worker button */
+.becomeWorkerButton {
+  height: fit-content;
+  padding: 7px 15px;
+  width: fit-content;
+  background-color: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 5px; 
+  cursor: pointer;
+}
+
+/* Worker modal container - Similar to main modal but for worker forms */
+#workerModalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Worker modal card */
+#workerModalContainer .modal-card {
+  background: var(--cream);
+  padding: 25px;
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 500px;
+  height: 85vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* button of busy */
+/* Toggle switch container for busy status */
+.toggle {
+  width: 52px;
+  height: 30px;
+  background-color: #e5e5ea;
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Toggle circle */
+.circle {
+  width: 26px;
+  height: 26px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* Check icon inside toggle */
+.check-icon {
+  stroke: #fff;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.2s ease;
+}
+
+/* Active state for toggle */
+.toggle.active {
+  background-color: #34c759;
+}
+
+/* Active state for circle */
+.toggle.active .circle {
+  transform: translateX(22px);
+}
+
+/* Active state for check icon */
+.toggle.active .check-icon {
+  opacity: 1;
+  transform: scale(1);
+  stroke: #34c759;
+}
+
+/* Hidden busy button */
+.busyButton {
+  display: none !important;
 }

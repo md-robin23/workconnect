@@ -3,44 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>Log In - Workconnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <div class="container">
-      <div class="title">
-        <h2>Jobify</h2>
-        <p>Start your journey now with us.</p>
-      </div>
-      <div class="formContainer">
-              <div class="childFormContainer">
-        <h3>Login to your account</h3>
-        <div>
-          <input
-          type="tel"
-          id="number"
-          class="box"
-          placeholder="Enter phone number"
-          maxlength="11"
-          minlength="11"
-          pattern="[0-9]" {11}
-          inputmode="numeric"
-          autofocus
-        />
+    <div class="login-container">
+      <!-- LEFT SIDE - BRANDING & MESSAGE - Company branding and feature highlights -->
+      <div class="login-branding">
+        <div class="branding-content">
+          <!-- Logo and main heading -->
+          <div class="logo">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h1>Workconnect</h1>
+          <p class="tagline">Start your journey now with us.</p>
+          <!-- Feature highlights -->
+          <div class="features">
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Find your dream job</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Connect with top employers</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Grow your career</span>
+            </div>
+          </div>
         </div>
-          
-        <div>
-          <input class="box" type="password" name="password" id="password" placeholder="Enter password" minlength="4"/>
-        </div>
-        <a href="../pages/home.html">
-          <button type="submit">Log In</button>
-        </a>
-
-      </div>
       </div>
 
+      <!-- RIGHT SIDE - LOGIN FORM - User login form with phone and password inputs -->
+      <div class="login-form-wrapper">
+        <div class="login-form">
+          <h2>Welcome Back</h2>
+          <p class="form-subtitle">Login to your account</p>
+
+          <!-- Login form with validation -->
+          <form id="loginForm">
+            <!-- Phone number input field -->
+            <div class="form-group">
+              <label for="number">Phone Number</label>
+              <div class="input-wrapper">
+                <i class="fas fa-phone"></i>
+                <input
+                  type="tel"
+                  id="number"
+                  class="form-input"
+                  placeholder="Enter phone number"
+                  maxlength="11"
+                  minlength="11"
+                  pattern="[0-9]{11}"
+                  inputmode="numeric"
+                  autofocus
+                  required
+                />
+              </div>
+              <span class="error-message" id="numberError"></span>
+            </div>
+
+            <!-- Password input field with toggle visibility -->
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-input"
+                  placeholder="Enter password"
+                  minlength="4"
+                  required
+                />
+                <!-- Password visibility toggle button -->
+                <button type="button" class="toggle-password" id="togglePassword">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <span class="error-message" id="passwordError"></span>
+            </div>
+
+            <!-- Login submit button -->
+            <button type="submit" class="login-button">
+              <span>Log In</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <!-- Sign up link - Redirect to registration page -->
+          <div class="signup-link">
+            <p>Don't have an account? <a href="signin.html">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script src="../js/login.js"></script>
+    <!-- Login script - Handles authentication and form validation -->
+    <script type="module" src="../js/login.js"></script>
 </body>
 </html>

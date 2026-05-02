@@ -1,9 +1,15 @@
+/* ========================================
+   UNIVERSAL RESET - Resets default browser margins, padding, and box-sizing for consistent styling
+   ======================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ========================================
+   CSS VARIABLES - Defines color scheme and styling constants used throughout the signup page
+   ======================================== */
 :root {
   --ink: #0f0e0c;
   --cream: #f5f0e8;
@@ -15,112 +21,630 @@
   --border: #d9d3c7;
   --green: #2d6a4f;
   --blue: #1d4e89;
+  --primary: #007bff;
+  --primary-dark: #0056b3;
+  --primary-light: #e7f1ff;
+  --success: #28a745;
+  --danger: #dc3545;
+  --light-gray: #f8f9fb;
+  --border-color: #dee2e6;
+  --text-muted: #6c757d;
+  --transition: all 0.3s ease;
 }
 
+/* ========================================
+   HTML AND BODY - Sets full height and width for the page layout
+   ======================================== */
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+/* ========================================
+   PAGE BACKGROUND - Creates the gradient background and centers the signup container
+   ======================================== */
 body {
-  background-color: var(--cream);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
-.container {
-  height: 70vh;
-  width: 55%;
-  /* gap: 50px; */
-  /* padding: 20px; */
-  background-color:#F8F9FB;
-  /* background-color: #0f0e0c; */
-  box-sizing: border-box;
-
+/* ========================================
+   SIGNUP CONTAINER - Main container that holds the two-column layout (branding + form)
+   ======================================== */
+.signup-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  max-height: 700px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: white;
 }
 
-.container .title {
-  width: 50%;
-  height: 100%;
+/* ========================================
+   BRANDING SECTION - Left side of the signup page with company logo and features
+   ======================================== */
+.signup-branding {
+  flex: 1;
+  background: linear-gradient(135deg, rgb(2, 6, 23) 0%, rgb(21, 57, 122) 100%);
   color: white;
-  background-color: rgb(2, 6, 23);
-  background-image: linear-gradient(
-    to bottom, 
-    rgb(2, 6, 23), 
-    rgb(21, 57, 122) 
-  );
-
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.container .formContainer {
-  width: 50%;
-  height: 100%;
-  background-color: #F8F9FB;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
 }
 
-.container .formContainer .childFormContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: normal;
-  row-gap: 10px;
-  background-color: #FFFFFF;
-  height: 88%;
-  width: 71%;
-  padding: 7px 21px;
+/* ========================================
+   BRANDING DECORATIVE ELEMENTS - Circular background elements for visual appeal
+   ======================================== */
+.signup-branding::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
 }
 
-.childFormContainer #number {
-  height: 32px;
-  border-radius: 5px;
+.signup-branding::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
 }
 
-#number::-webkit-inner-spin-button,
-#number::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.childFormContainer #sendOtp {
-  height: 31px;
-  background-color: rgb(0,123, 255);
-  border-style: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.childFormContainer #confirmOtp {
-  height: 31px;
-  background-color: rgb(0, 123, 255);
-  border-style: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.otpBox {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  /* margin: 20px 0; */
-}
-
-.otpBox input {
-  height: 30px;
-  width: 30px;
-  /* background-color: #0f0e0c; */
+/* ========================================
+   BRANDING CONTENT - Container for logo, title, and features in the branding section
+   ======================================== */
+.branding-content {
   text-align: center;
-  font-size: 1.2rem;
-  border: 1px solid var(--border);
-  background-color: white;
+  z-index: 1;
+}
+
+
+/* ========================================
+   LOGO - Company logo/icon in the branding section
+   ======================================== */
+.logo {
+  font-size: 60px;
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+/* ========================================
+   BRANDING HEADING - Main title in the branding section
+   ======================================== */
+.signup-branding h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* ========================================
+   TAGLINE - Subtitle/tagline under the main heading
+   ======================================== */
+.signup-branding .tagline {
+  font-size: 16px;
+  opacity: 0.85;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+/* ========================================
+   FEATURES LIST - Container for feature items showcasing platform benefits
+   ======================================== */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+/* ========================================
+   FEATURE ITEM - Individual feature with icon and text
+   ======================================== */
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ========================================
+   FEATURE ICON - Font Awesome icon within feature items
+   ======================================== */
+.feature-item i {
+  font-size: 16px;
+}
+
+/* ========================================
+   FORM SECTION - Right side of the signup page containing the signup form
+   ======================================== */
+.signup-form-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: var(--light-gray);
+}
+
+/* ========================================
+   SIGNUP FORM - Main form container with max width constraint
+   ======================================== */
+.signup-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ========================================
+   FORM HEADING - Main heading for the signup form
+   ======================================== */
+.signup-form h2 {
+  font-size: 32px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+/* ========================================
+   FORM SUBTITLE - Subtitle text under the main heading
+   ======================================== */
+.form-subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+/* ========================================
+   FORM ELEMENTS - Input fields and buttons
+   ======================================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ========================================
+   FORM GROUP - Container for label and input pairs
+   ======================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ========================================
+   FORM LABEL - Label text for form inputs
+   ======================================== */
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+
+/* ========================================
+   INPUT WRAPPER - Container for input field with icon
+   ======================================== */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  transition: var(--transition);
+  padding: 0 12px;
+}
+
+/* ========================================
+   INPUT WRAPPER FOCUS STATE - Changes border and shadow when input is focused
+   ======================================== */
+.input-wrapper:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+/* ========================================
+   INPUT ICON - Font Awesome icon inside the input wrapper
+   ======================================== */
+.input-wrapper i {
+  color: var(--text-muted);
+  margin-right: 10px;
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+/* ========================================
+   INPUT ICON FOCUS STATE - Changes icon color when input is focused
+   ======================================== */
+.input-wrapper:focus-within i {
+  color: var(--primary);
+}
+
+/* ========================================
+   FORM INPUT - Text input field styling
+   ======================================== */
+.form-input {
+  flex: 1;
+  border: none;
+  padding: 12px 0;
+  font-size: 15px;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+}
+
+/* ========================================
+   INPUT PLACEHOLDER - Styling for placeholder text
+   ======================================== */
+.form-input::placeholder {
+  color: #b0bac9;
+}
+
+/* ========================================
+   AUTOFILL STYLING - Overrides browser autofill styling to match design
+   ======================================== */
+.form-input:-autofill,
+.form-input:-autofill:hover,
+.form-input:-autofill:focus,
+.form-input:-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: var(--ink) !important;
+}
+
+/* ========================================
+   ERROR MESSAGE - Hidden error text that shows when validation fails
+   ======================================== */
+.error-message {
+  font-size: 12px;
+  color: var(--danger);
+  display: none;
+}
+
+/* ========================================
+   ERROR MESSAGE VISIBLE - Shows error message when input has error class
+   ======================================== */
+.form-input.error ~ .error-message {
+  display: block;
+}
+
+/* ========================================
+   OTP SECTION - Container for OTP input fields and label
+   ======================================== */
+.otp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ========================================
+   OTP LABEL - Label for the OTP input section
+   ======================================== */
+.otp-section label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+
+/* ========================================
+   OTP CONTAINER - Wrapper for centering the OTP inputs
+   ======================================== */
+.otp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========================================
+   OTP INPUTS - Container for the individual OTP input boxes
+   ======================================== */
+.otp-inputs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* ========================================
+   OTP INPUT - Individual input box for each OTP digit
+   ======================================== */
+.otp-input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  transition: var(--transition);
+}
+
+/* ========================================
+   OTP INPUT FOCUS - Changes border and shadow when OTP input is focused
+   ======================================== */
+.otp-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* ========================================
+   BUTTON GROUP - Container for signup buttons
+   ======================================== */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* ========================================
+   SIGNUP BUTTON - Primary signup button with gradient background
+   ======================================== */
+.signup-button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* ========================================
+   SIGNUP BUTTON HOVER - Lifts button and increases shadow on hover
+   ======================================== */
+.signup-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* ========================================
+   SIGNUP BUTTON ACTIVE - Returns button to original position when clicked
+   ======================================== */
+.signup-button:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   SIGNUP BUTTON DISABLED - Styles for disabled state (loading, etc.)
+   ======================================== */
+.signup-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
+/* ========================================
+   SIGNUP BUTTON ICON - Icon inside the signup button
+   ======================================== */
+.signup-button i {
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+/* ========================================
+   SIGNUP BUTTON ICON HOVER - Moves icon slightly on button hover
+   ======================================== */
+.signup-button:hover i {
+  transform: translateX(4px);
+}
+
+/* ========================================
+   SIGNUP BUTTON SECONDARY - Alternative button style (for verify OTP)
+   ======================================== */
+.signup-button.secondary {
+  background: linear-gradient(135deg, var(--success) 0%, #218838 100%);
+}
+
+/* ========================================
+   SECONDARY BUTTON HOVER - Green shadow for secondary button hover
+   ======================================== */
+.signup-button.secondary:hover {
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* ========================================
+   LOGIN LINK - Link to login page for existing users
+   ======================================== */
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ========================================
+   LOGIN LINK ANCHOR - Styling for the actual link element
+   ======================================== */
+.login-link a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+/* ========================================
+   LOGIN LINK HOVER - Underlines and darkens link on hover
+   ======================================== */
+.login-link a:hover {
+  text-decoration: underline;
+  color: var(--primary-dark);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - Tablet and smaller screen adjustments
+   ======================================== */
+@media (max-width: 968px) {
+  .signup-container {
+    height: auto;
+    flex-direction: column-reverse;
+  }
+
+  .signup-branding {
+    padding: 30px 20px;
+    min-height: 200px;
+  }
+
+  .signup-branding h1 {
+    font-size: 36px;
+  }
+
+  .signup-form-wrapper {
+    padding: 30px 20px;
+    min-height: auto;
+  }
+
+  .features {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .feature-item {
+    flex: 0 1 auto;
+  }
+}
+
+/* ========================================
+   MOBILE DESIGN - Small screen optimizations
+   ======================================== */
+@media (max-width: 640px) {
+  body {
+    background: white;
+  }
+
+  .signup-container {
+    border-radius: 0;
+    max-height: 100vh;
+    box-shadow: none;
+  }
+
+  .signup-branding {
+    padding: 20px;
+    min-height: 150px;
+  }
+
+  .signup-branding h1 {
+    font-size: 28px;
+  }
+
+  .logo {
+    font-size: 48px;
+  }
+
+  .signup-branding .tagline {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .features {
+    gap: 12px;
+  }
+
+  .feature-item {
+    font-size: 13px;
+  }
+
+  .signup-form-wrapper {
+    padding: 20px;
+  }
+
+  .signup-form h2 {
+    font-size: 26px;
+  }
+
+  .form-subtitle {
+    font-size: 13px;
+  }
+
+  .input-wrapper {
+    padding: 0 10px;
+  }
+
+  .form-input {
+    padding: 10px 0;
+    font-size: 14px;
+  }
+
+  .signup-button {
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+
+  .otp-input {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
+/* ========================================
+   EXTRA SMALL SCREENS - Very small mobile device optimizations
+   ======================================== */
+@media (max-width: 480px) {
+  .signup-container {
+    border-radius: 0;
+  }
+
+  .signup-form h2 {
+    font-size: 22px;
+  }
+
+  .form-subtitle {
+    margin-bottom: 20px;
+  }
+
+  form {
+    gap: 16px;
+  }
+
+  .signup-button {
+    padding: 10px 16px;
+  }
+
+  .input-wrapper i {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  .otp-inputs {
+    gap: 6px;
+  }
+
+  .otp-input {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
 }
