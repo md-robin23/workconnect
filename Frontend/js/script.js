@@ -10,7 +10,8 @@ const workersEl = document.querySelector('.total-workers .digit');
 // Function to fetch and update job statistics from the backend
 async function fetchStats() {
     try {
-        const response = await fetch('http://localhost:3000/api/r1/stats');
+        // const response = await fetch('http://localhost:3000/api/r1/stats');
+        const response = await fetch('https://workconnect-o80d.onrender.com/api/r1/stats');
         if (!response.ok) throw new Error('Failed to fetch stats');
         const data = await response.json();
         activeJobsEl.textContent = data.activeJobs;

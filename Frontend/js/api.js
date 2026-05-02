@@ -2,17 +2,15 @@
  * API BASE URL
  * Dynamically sets the backend API URL based on environment
  * Development: http://localhost:3000/api/r1
- * Production: https://yourdomain.com/api/r1 (update yourdomain.com with your production domain)
+ * Production: https://workconnect-o80d.onrender.com/api/r1
  * 
- * To change production domain: Replace 'yourdomain.com' with your actual domain
+ * To change production domain: Replace 'workconnect-o80d.onrender.com' with your actual backend domain
  */
 const getBaseUrl = () => {
     // Check if running in production (not localhost)
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        // Production environment - use current domain
-        const protocol = window.location.protocol; // https: or http:
-        const host = window.location.host; // yourdomain.com:port or yourdomain.com
-        return `${protocol}//${host}/api/r1`;
+        // Production environment - use Render backend URL
+        return 'https://workconnect-o80d.onrender.com/api/r1';
     }
     // Development environment
     return 'http://localhost:3000/api/r1';
